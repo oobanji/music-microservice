@@ -5,7 +5,7 @@ import com.example.musicstoreservice.models.Genre;
 import java.util.List;
 
 public interface GenreRepository {
-    List<Genre> all();
+    List<Genre> list();
 
     Genre getByName(String name);
 

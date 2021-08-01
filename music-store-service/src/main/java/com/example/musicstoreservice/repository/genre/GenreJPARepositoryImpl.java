@@ -8,14 +8,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class GenreJPARepositoryImpl implements GenreRepository{
+public class GenreJPARepositoryImpl implements GenreRepository {
 
     @Autowired
     private GenreJPARepository genreRepository;
 
 
     @Override
-    public List<Genre> all() {
+    public List<Genre> list() {
         return genreRepository.findAll();
     }
 

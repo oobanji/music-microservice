@@ -1,56 +1,62 @@
 package com.example.musicstoreservice.repository.album;
 
 import com.example.musicstoreservice.models.Album;
-import com.example.musicstoreservice.models.Artist;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Repository;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
+@Repository
 public class AlbumRepositoryImpl implements AlbumRepository {
 
     @Autowired
+    @Lazy
     AlbumJPARepository albumRepository;
 
     @Override
-    public List<Album> all() {
+    public List<Album> list() {
         return albumRepository.findAll();
     }
 
     @Override
-    public Album getByName(String name) {
+    public Album getByTitle(String name) {
         return this.albumRepository.findByName(name);
     }
 
     @Override
-    public Album getById(Long id) {
+    public Album get(Long id) {
         return albumRepository.findById(id)
                 .orElseThrow();
     }
 
-
     @Override
     public List<Album> topSelling(int count) {
-        return null;
-    }
-
-    @Override
-    public List<Artist> allArtists() {
-        return null;
+        return albumRepository.findAll().
+                stream().sorted(Comparator.comparingInt(Album::getOrderCount)).
+                collect(Collectors.toList()).subList(0, count);
     }
 
     @Override
     public void add(Album album) {
-
+        albumRepository.saveAndFlush(album);
     }
 
     @Override
-    public void update(Album album) {
+    public Album update(Album album) {
+        Album exitingAlbum = albumRepository.findById(album.getAlbumId()).orElseThrow();
+        BeanUtils.copyProperties(album, exitingAlbum);
 
+        return albumRepository.saveAndFlush(exitingAlbum);
     }
 
     @Override
-    public void delete(Album album) {
-
+    public Album delete(Long id) {
+        Album existingAlbum = albumRepository.findById(id).orElseThrow();
+        albumRepository.delete(existingAlbum);
+        return existingAlbum;
     }
 }

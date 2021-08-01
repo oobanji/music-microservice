@@ -1,27 +1,28 @@
 package com.example.musicstoreservice.service;
 
+import com.example.musicstoreservice.models.Album;
 import com.example.musicstoreservice.models.Genre;
-import com.example.musicstoreservice.repository.genre.GenreRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class MusicStoreService {
-    @Autowired
-    private GenreRepository genreRepository;
+public interface MusicStoreService {
 
+    List<Genre> getGenres();
 
-    public List<Genre> getGenres() {
-        return genreRepository.all();
-    }
+    Genre getGenreByName(String name);
 
-    public Genre getGenreByName(String name) {
-        return genreRepository.getByName(name);
-    }
+    Genre getGenreById(Long id);
 
-    public Genre getGenreById(Long id) {
-        return genreRepository.getById(id);
-    }
+    List<Album> getAlbums();
 
+    Album getAlbum(String title);
 
+    List<Album> topSelling(int count);
+
+    void addAlbum(Album album);
+
+    Album update(Album album);
+
+    Album delete(Long id);
 }
