@@ -3,19 +3,15 @@ package com.example.musicstoreservice.repository.genre;
 
 import com.example.musicstoreservice.models.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Primary
 @Repository
 public class GenreJPARepositoryImpl implements GenreRepository {
-
-    private final GenreJPARepository genreRepository;
-
-    @Autowired
-    public GenreJPARepositoryImpl(GenreJPARepository genreRepository) {
-        this.genreRepository = genreRepository;
-    }
+    private GenreJPARepository genreRepository;
 
     @Override
     public List<Genre> list() {

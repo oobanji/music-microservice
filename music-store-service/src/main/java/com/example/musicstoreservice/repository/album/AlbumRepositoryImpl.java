@@ -3,20 +3,17 @@ package com.example.musicstoreservice.repository.album;
 import com.example.musicstoreservice.models.Album;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Primary
 @Repository
 public class AlbumRepositoryImpl implements AlbumRepository {
-    private final AlbumJPARepository albumRepository;
-
-    @Autowired
-    public AlbumRepositoryImpl(AlbumJPARepository albumRepository) {
-        this.albumRepository = albumRepository;
-    }
+    private AlbumJPARepository albumRepository;
 
     @Override
     public List<Album> list() {
@@ -25,7 +22,8 @@ public class AlbumRepositoryImpl implements AlbumRepository {
 
     @Override
     public Album getByTitle(String name) {
-        return this.albumRepository.findByName(name);
+        //return this.albumRepository.findByName(name);
+        return null;
     }
 
     @Override

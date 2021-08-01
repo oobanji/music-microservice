@@ -11,11 +11,15 @@ import java.util.List;
 
 @Service
 public class MusicStoreServiceImpl implements MusicStoreService {
-    @Autowired
     private AlbumRepository albumRepository;
 
-    @Autowired
     private GenreRepository genreRepository;
+
+    @Autowired
+    public MusicStoreServiceImpl(AlbumRepository albumRepository, GenreRepository genreRepository) {
+        this.albumRepository = albumRepository;
+        this.genreRepository = genreRepository;
+    }
 
     @Override
     public List<Genre> getGenres() {

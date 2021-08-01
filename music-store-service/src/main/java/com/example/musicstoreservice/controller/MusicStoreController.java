@@ -3,7 +3,6 @@ package com.example.musicstoreservice.controller;
 import com.example.musicstoreservice.models.Album;
 import com.example.musicstoreservice.models.Genre;
 import com.example.musicstoreservice.service.MusicStoreService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,11 +14,7 @@ import java.util.List;
 @RequestMapping("Store")
 public class MusicStoreController {
 
-    @Autowired
     private MusicStoreService musicStoreService;
-
-    public MusicStoreController() {
-    }
 
     @RequestMapping(value = "Genres", method = RequestMethod.GET)
     public List<Genre> getGenres() {
