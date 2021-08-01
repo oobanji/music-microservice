@@ -2,7 +2,9 @@ package com.example.musicstoreservice.controller;
 
 import com.example.musicstoreservice.models.Album;
 import com.example.musicstoreservice.models.Genre;
-import com.example.musicstoreservice.service.MusicStoreService;
+import com.example.musicstoreservice.repository.album.AlbumRepository;
+import com.example.musicstoreservice.repository.genre.GenreRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,11 +16,18 @@ import java.util.List;
 @RequestMapping("Store")
 public class MusicStoreController {
 
-    private MusicStoreService musicStoreService;
+    private GenreRepository genreRepository;
+    private AlbumRepository albumRepository;
+
+    @Autowired
+    public MusicStoreController(GenreRepository genreRepository, AlbumRepository albumRepository) {
+        this.genreRepository = genreRepository;
+        this.albumRepository = albumRepository;
+    }
 
     @RequestMapping(value = "Genres", method = RequestMethod.GET)
     public List<Genre> getGenres() {
-        return musicStoreService.getGenres();
+        return genreRepository.list();
     }
 
     @RequestMapping(value = "Genre", method = RequestMethod.GET)
@@ -26,9 +35,9 @@ public class MusicStoreController {
         Genre genre = null;
 
         if (!id.equals(0)) {
-            genre = musicStoreService.getGenreById(id);
+            genre = genreRepository.getById(id);
         } else {
-            genre = musicStoreService.getGenreByName(name);
+            genre = genreRepository.getByName(name);
         }
 
         return genre;
@@ -36,11 +45,11 @@ public class MusicStoreController {
 
     @RequestMapping(value = "Albums", method = RequestMethod.GET)
     public List<Album> getAlbums(String genre) {
-        return musicStoreService.getAlbums();
+        return albumRepository.list();
     }
 
     @RequestMapping(value = "TopSelling", method = RequestMethod.GET)
     public List<Album> getTopSelling(@RequestParam(value = "count", defaultValue = "6") int count) {
-        return musicStoreService.topSelling(count);
+        return albumRepository.topSelling(count);
     }
 }
