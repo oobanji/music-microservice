@@ -10,9 +10,12 @@ import java.util.List;
 @Repository
 public class GenreJPARepositoryImpl implements GenreRepository {
 
-    @Autowired
-    private GenreJPARepository genreRepository;
+    private final GenreJPARepository genreRepository;
 
+    @Autowired
+    public GenreJPARepositoryImpl(GenreJPARepository genreRepository) {
+        this.genreRepository = genreRepository;
+    }
 
     @Override
     public List<Genre> list() {

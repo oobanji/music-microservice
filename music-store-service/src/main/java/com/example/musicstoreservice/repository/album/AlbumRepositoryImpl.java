@@ -3,7 +3,6 @@ package com.example.musicstoreservice.repository.album;
 import com.example.musicstoreservice.models.Album;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
 import java.util.Comparator;
@@ -12,10 +11,12 @@ import java.util.stream.Collectors;
 
 @Repository
 public class AlbumRepositoryImpl implements AlbumRepository {
+    private final AlbumJPARepository albumRepository;
 
     @Autowired
-    @Lazy
-    AlbumJPARepository albumRepository;
+    public AlbumRepositoryImpl(AlbumJPARepository albumRepository) {
+        this.albumRepository = albumRepository;
+    }
 
     @Override
     public List<Album> list() {

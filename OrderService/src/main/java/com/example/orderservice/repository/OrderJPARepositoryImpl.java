@@ -7,8 +7,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class OrderJPARepositoryImpl implements OrderRepository {
 
+    private final OrderJPARepository orderJPARepository;
+
     @Autowired
-    private OrderJPARepository orderJPARepository;
+    public OrderJPARepositoryImpl(OrderJPARepository orderJPARepository) {
+        this.orderJPARepository = orderJPARepository;
+    }
 
     @Override
     public Order create(Order order) {
