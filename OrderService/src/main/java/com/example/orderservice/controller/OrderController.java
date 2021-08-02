@@ -21,7 +21,7 @@ public class OrderController {
         return null;
     }
 
-    @RequestMapping(value = "Order", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public Order getOrder(@RequestParam Long id) {
         return null;
     }
