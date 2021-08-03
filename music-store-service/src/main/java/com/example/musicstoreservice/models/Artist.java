@@ -1,6 +1,11 @@
 package com.example.musicstoreservice.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Artist {
+    @Id
     private Long artistId;
     private String artistName;
 

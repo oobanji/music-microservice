@@ -3,12 +3,10 @@ package com.example.orderservice.models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
-
-import java.util.Date;
-import java.util.List;
+import java.sql.Date;
 
 @Entity
-public class Order {
+public class OrderObject {
     @Id
     private Long orderId;
     private Date orderDate;

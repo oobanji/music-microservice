@@ -3,6 +3,7 @@ package com.example.musicstoreservice.repository.genre;
 
 import com.example.musicstoreservice.models.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,8 @@ import java.util.List;
 @Primary
 @Repository
 public class GenreJPARepositoryImpl implements GenreRepository {
+    @Autowired
+    @Lazy
     private GenreJPARepository genreRepository;
 
     @Override
@@ -27,5 +30,10 @@ public class GenreJPARepositoryImpl implements GenreRepository {
     public Genre getById(Long id) {
         return genreRepository.findById(id)
                 .orElseThrow();
+    }
+
+    @Override
+    public void add(Genre genre) {
+        this.genreRepository.save(genre);
     }
 }

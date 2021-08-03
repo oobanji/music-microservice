@@ -40,7 +40,7 @@ public class Album {
         this.price = price;
     }
 
-    public long getAlbumId() {
+    public Long getAlbumId() {
         return albumId;
     }
 
@@ -48,7 +48,7 @@ public class Album {
         this.albumId = albumId;
     }
 
-    public long getGenreId() {
+    public Long getGenreId() {
         return genreId;
     }
 
@@ -56,7 +56,7 @@ public class Album {
         this.genreId = genreId;
     }
 
-    public long getArtistId() {
+    public Long getArtistId() {
         return artistId;
     }
 

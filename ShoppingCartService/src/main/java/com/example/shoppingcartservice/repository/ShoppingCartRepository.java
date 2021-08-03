@@ -6,9 +6,9 @@ import com.example.shoppingcartservice.models.ShoppingCart;
 import java.util.List;
 
 public interface ShoppingCartRepository {
-    List<CartItem> list(Long id);
+    ShoppingCart get(String id);
 
-    void create(String id);
+    void create(ShoppingCart cart);
 
     ShoppingCart deleteCart(String id);
 

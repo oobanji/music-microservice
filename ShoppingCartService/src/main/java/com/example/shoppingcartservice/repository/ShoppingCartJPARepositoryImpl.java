@@ -2,35 +2,34 @@ package com.example.shoppingcartservice.repository;
 
 import com.example.shoppingcartservice.models.CartItem;
 import com.example.shoppingcartservice.models.ShoppingCart;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Primary
 @Repository
 public class ShoppingCartJPARepositoryImpl implements ShoppingCartRepository {
 
+    @Autowired
+    @Lazy
     private ShoppingCartJPARepository shoppingCartJPARepository;
 
     @Override
-    public List<CartItem> list(Long id) {
-        return this.shoppingCartJPARepository.findById(id)
-                .get().
-                getCartItems();
+    public ShoppingCart get(String id) {
+        return this.shoppingCartJPARepository.findById(id).orElseThrow();
     }
 
     @Override
-    public void create(String id) {
-        ShoppingCart cart = this.shoppingCartJPARepository.
-                findAll().stream().filter(c -> c.getCartId() == id).
-                findAny().orElseThrow();
-
+    public void create(ShoppingCart newCart) {
+        shoppingCartJPARepository.save(newCart);
     }
 
     @Override
     public ShoppingCart deleteCart(String id) {
-        return null;
+        ShoppingCart existingCart = shoppingCartJPARepository.getById(id);
+        this.shoppingCartJPARepository.delete(existingCart);
+        return existingCart;
     }
 
     @Override

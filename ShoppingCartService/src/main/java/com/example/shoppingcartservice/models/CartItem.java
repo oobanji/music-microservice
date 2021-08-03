@@ -33,7 +33,7 @@ public class CartItem {
     }
 
     public void setCount(int count) {
-        this.count = count;
+        this.count += count;
     }
 
     public Date getDateCreated() {

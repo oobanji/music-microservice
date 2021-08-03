@@ -1,28 +1,27 @@
 package com.example.orderservice.controller;
 
-import com.example.orderservice.models.Order;
+import com.example.orderservice.models.OrderObject;
 import com.example.orderservice.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api")
-public class OrderController {
-
+public class OrderObjectController {
     private OrderRepository orderRepository;
 
     @Autowired
-    public OrderController(OrderRepository orderRepository) {
+    public OrderObjectController(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
 
     @RequestMapping(value = "Order", method = RequestMethod.POST)
-    public Order createOrder(@RequestBody Order order) {
-        return null;
+    public OrderObject createOrder(@RequestBody OrderObject order) {
+        return orderRepository.create(order);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public Order getOrder(@RequestParam Long id) {
-        return null;
+    @RequestMapping(value = "Order/get", method = RequestMethod.GET)
+    public OrderObject getOrder(@RequestParam Long id) {
+        return orderRepository.get(id);
     }
 }

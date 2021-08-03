@@ -10,4 +10,5 @@ public interface GenreRepository {
     Genre getByName(String name);
 
     Genre getById(Long id);
+    void add(Genre genre);
 }

@@ -1,9 +1,10 @@
 package com.example.orderservice.repository;
 
-import com.example.orderservice.models.Order;
+import com.example.orderservice.models.OrderObject;
 
 public interface OrderRepository {
-    Order create(Order order);
 
-    Order get(Long id);
+    OrderObject create(OrderObject order);
+
+    OrderObject get(Long id);
 }

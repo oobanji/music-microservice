@@ -3,6 +3,7 @@ package com.example.musicstoreservice.repository.album;
 import com.example.musicstoreservice.models.Album;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +14,8 @@ import java.util.stream.Collectors;
 @Primary
 @Repository
 public class AlbumRepositoryImpl implements AlbumRepository {
+    @Autowired
+    @Lazy
     private AlbumJPARepository albumRepository;
 
     @Override
